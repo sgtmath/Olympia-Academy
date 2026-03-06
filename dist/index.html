@@ -87,6 +87,14 @@
         --tw-prose-td-borders: #363a4f;
       }
     </style>
+
+<!-- Add Babel for in-browser transpilation of TSX -->
+<script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+<link rel="stylesheet" href="index.css">
+</head>
+  <body class="bg-ctp-base text-ctp-text font-sans selection:bg-ctp-mauve/30 selection:text-ctp-mauve">
+    <div id="root"></div>
+    <!-- Load the main TSX file, which Babel will transpile -->
   <script type="importmap">
 {
   "imports": {
@@ -100,13 +108,6 @@
   }
 }
 </script>
-<!-- Add Babel for in-browser transpilation of TSX -->
-<script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
-<link rel="stylesheet" href="index.css">
-</head>
-  <body class="bg-ctp-base text-ctp-text font-sans selection:bg-ctp-mauve/30 selection:text-ctp-mauve">
-    <div id="root"></div>
-    <!-- Load the main TSX file, which Babel will transpile -->
     <script type="text/babel" data-presets="react,typescript" data-type="module" src="/index.tsx"></script>
   </body>
 </html>
