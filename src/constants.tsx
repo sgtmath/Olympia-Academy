@@ -7,6 +7,8 @@ export const NAV_LINKS = [
   { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
   { name: 'Courses', href: '#courses' },
+  { name: 'Tutors', href: '#tutors' },
+  { name: 'Challenge', href: '#problem-of-the-day' },
   { name: 'Blog', href: '#blog' },
   { name: 'FAQ', href: '#faq' },
   { name: 'Contact', href: '#contact' },
@@ -189,6 +191,27 @@ Here's a great talk on the mindset required for high-level competitions:
 *Your mind is your most powerful tool. Keep it sharp.*
     `
   },
+];
+
+export const TUTORS_DATA: Tutor[] = [
+  {
+    image: 'https://picsum.photos/seed/tutor1/400/400',
+    name: 'Dr. Robert Chen',
+    credentials: ['PhD in Mathematics, MIT', 'IMO Gold Medalist'],
+    bio: 'Specializes in Number Theory and Algebraic Geometry. Over 15 years of experience coaching top-tier Olympiad students.'
+  },
+  {
+    image: 'https://picsum.photos/seed/tutor2/400/400',
+    name: 'Sarah Williams',
+    credentials: ['MSc in Combinatorics, Oxford', 'Former IMO Team Lead'],
+    bio: 'An expert in Combinatorics and Graph Theory. Passionate about developing creative problem-solving intuition in young minds.'
+  },
+  {
+    image: 'https://picsum.photos/seed/tutor3/400/400',
+    name: 'Michael Zhang',
+    credentials: ['Putnam Fellow', 'Expert in Euclidean Geometry'],
+    bio: 'Known for his elegant solutions to complex geometry problems. He has mentored dozens of students to national-level success.'
+  }
 ];
 
 export const FAQ_DATA: FAQItem[] = [
