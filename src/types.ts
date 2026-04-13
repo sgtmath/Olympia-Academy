@@ -2,11 +2,21 @@
 import React from 'react';
 
 export interface Course {
+  id: string;
   icon: React.ReactNode;
   title: string;
   description: string;
   level: string;
   href: string;
+}
+
+export interface CourseDetail {
+  title: string;
+  description: string;
+  fullContent: string;
+  curriculum: string[];
+  price: string;
+  level: string;
 }
 
 export interface Tutor {

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  Calculator, 
-  Cpu, 
-  Trophy, 
-  Users, 
-  BookOpen, 
-  Target, 
-  ArrowRight, 
+import { Routes, Route, Link, NavLink, useParams, useNavigate } from 'react-router-dom';
+import {
+  Calculator,
+  Cpu,
+  Trophy,
+  Users,
+  BookOpen,
+  Target,
+  ArrowRight,
   CheckCircle2,
   Mail,
   Phone,
@@ -27,13 +28,11 @@ import {
   BookMarked,
   Newspaper
 } from 'lucide-react';
-
-// --- Types ---
-type Section = 'home' | 'about' | 'courses' | 'blog' | 'faq' | 'contact';
+import { COURSES_DATA, COURSE_DETAILS } from './constants';
 
 // --- Components ---
 
-const Navbar = ({ activeSection, setActiveSection }: { activeSection: Section, setActiveSection: (s: Section) => void }) => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -43,38 +42,35 @@ const Navbar = ({ activeSection, setActiveSection }: { activeSection: Section, s
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks: { name: string, id: Section }[] = [
-    { name: 'Home', id: 'home' },
-    { name: 'About', id: 'about' },
-    { name: 'Courses', id: 'courses' },
-    { name: 'Blog', id: 'blog' },
-    { name: 'FAQ', id: 'faq' },
-    { name: 'Contact', id: 'contact' },
+  const navLinks = [
+    { name: 'Home', to: '/' },
+    { name: 'About', to: '/about' },
+    { name: 'Courses', to: '/courses' },
+    { name: 'Blog', to: '/blog' },
+    { name: 'FAQ', to: '/faq' },
+    { name: 'Contact', to: '/contact' },
   ];
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-mantle/80 backdrop-blur-md border-b border-surface0 shadow-lg' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
-          <div className="flex items-center gap-3 cursor-pointer group" onClick={() => setActiveSection('home')}>
+          <Link to="/" className="flex items-center gap-3 cursor-pointer group">
             <div className="bg-mauve p-2 rounded-xl rotate-3 group-hover:rotate-0 transition-transform">
               <Calculator className="w-6 h-6 text-base" />
             </div>
             <span className="font-display font-bold text-2xl tracking-tight text-text">Hugging<span className="text-mauve">Math</span></span>
-          </div>
-          
+          </Link>
+
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => setActiveSection(link.id)}
-                className={`text-sm font-medium transition-colors relative py-2 ${activeSection === link.id ? 'text-mauve' : 'text-subtext1 hover:text-mauve'}`}
+              <NavLink
+                key={link.to}
+                to={link.to}
+                className={({ isActive }) => `text-sm font-medium transition-colors relative py-2 ${isActive ? 'text-mauve' : 'text-subtext1 hover:text-mauve'}`}
               >
                 {link.name}
-                {activeSection === link.id && (
-                  <motion.div layoutId="nav-underline" className="absolute bottom-0 left-0 w-full h-0.5 bg-mauve rounded-full" />
-                )}
-              </button>
+              </NavLink>
             ))}
             <button className="bg-mauve text-base px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-pink transition-all shadow-lg shadow-mauve/20 active:scale-95">
               Get Started
@@ -100,13 +96,14 @@ const Navbar = ({ activeSection, setActiveSection }: { activeSection: Section, s
           >
             <div className="px-4 pt-2 pb-6 space-y-2">
               {navLinks.map((link) => (
-                <button
-                  key={link.id}
-                  onClick={() => { setActiveSection(link.id); setIsOpen(false); }}
-                  className={`block w-full text-left px-4 py-3 rounded-xl text-base font-medium ${activeSection === link.id ? 'bg-surface0 text-mauve' : 'text-subtext1'}`}
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setIsOpen(false)}
+                  className="block w-full text-left px-4 py-3 rounded-xl text-base font-medium text-subtext1 hover:bg-surface0 hover:text-mauve"
                 >
                   {link.name}
-                </button>
+                </Link>
               ))}
               <button className="w-full bg-mauve text-base px-6 py-4 rounded-xl text-base font-bold mt-4">
                 Get Started
@@ -119,13 +116,13 @@ const Navbar = ({ activeSection, setActiveSection }: { activeSection: Section, s
   );
 };
 
-const Home = ({ setActiveSection }: { setActiveSection: (s: Section) => void }) => (
+const Home = () => (
   <div className="space-y-32">
     <section className="relative pt-40 pb-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-mauve/10 text-mauve text-xs font-bold uppercase tracking-widest mb-8 border border-mauve/20"
@@ -133,7 +130,7 @@ const Home = ({ setActiveSection }: { setActiveSection: (s: Section) => void }) 
               <Sparkles className="w-3.5 h-3.5" />
               The Future of Math Education
             </motion.div>
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
@@ -142,7 +139,7 @@ const Home = ({ setActiveSection }: { setActiveSection: (s: Section) => void }) 
               Love Math. <br />
               <span className="text-mauve">Master</span> It.
             </motion.h1>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -150,25 +147,25 @@ const Home = ({ setActiveSection }: { setActiveSection: (s: Section) => void }) 
             >
               HuggingMath is where curiosity meets rigorous training. We help students unlock their mathematical potential through intuitive learning and elite competition prep.
             </motion.p>
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center gap-6"
             >
-              <button 
-                onClick={() => setActiveSection('courses')}
+              <Link
+                to="/courses"
                 className="w-full sm:w-auto bg-mauve text-base px-10 py-5 rounded-2xl font-bold hover:bg-pink transition-all shadow-xl shadow-mauve/20 flex items-center justify-center gap-3 group"
               >
                 Explore Courses
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button 
-                onClick={() => setActiveSection('about')}
+              </Link>
+              <Link
+                to="/about"
                 className="w-full sm:w-auto bg-surface0 text-text border border-surface1 px-10 py-5 rounded-2xl font-bold hover:bg-surface1 transition-all"
               >
                 Our Story
-              </button>
+              </Link>
             </motion.div>
           </div>
           <motion.div 
@@ -280,38 +277,28 @@ const Courses = () => (
         <p className="text-subtext1 max-w-2xl mx-auto text-lg">From foundational logic to advanced competition theory, we have a path for every learner.</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {[
-          { title: 'Foundations of Logic', level: 'Beginner', duration: '12 Weeks', price: '$299', icon: Target, color: 'blue' },
-          { title: 'Olympiad Algebra', level: 'Intermediate', duration: '16 Weeks', price: '$499', icon: Calculator, color: 'mauve' },
-          { title: 'Number Theory Pro', level: 'Advanced', duration: '20 Weeks', price: '$699', icon: Sparkles, color: 'pink' },
-          { title: 'Geometry Mastery', level: 'Intermediate', duration: '14 Weeks', price: '$449', icon: BookOpen, color: 'teal' },
-          { title: 'Combinatorics Elite', level: 'Advanced', duration: '18 Weeks', price: '$599', icon: Cpu, color: 'peach' },
-          { title: 'Mock Test Series', level: 'All Levels', duration: 'Ongoing', price: '$149', icon: Trophy, color: 'yellow' },
-        ].map((course, i) => (
-          <motion.div 
-            key={i}
+        {COURSES_DATA.map((course) => (
+          <motion.div
+            key={course.id}
             whileHover={{ y: -10 }}
             className="bg-surface0 rounded-[32px] border border-surface1 overflow-hidden group hover:border-mauve/50 transition-all"
           >
             <div className="p-8">
-              <div className={`w-14 h-14 bg-${course.color}/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                <course.icon className={`w-7 h-7 text-${course.color}`} />
+              <div className="w-14 h-14 bg-mauve/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                {course.icon}
               </div>
               <div className="flex justify-between items-start mb-4">
                 <span className="px-3 py-1 rounded-full bg-surface1 text-subtext1 text-[10px] font-bold uppercase tracking-widest">{course.level}</span>
-                <span className="text-mauve font-bold">{course.price}</span>
               </div>
               <h3 className="text-2xl font-bold text-text mb-4">{course.title}</h3>
-              <div className="flex items-center gap-4 text-sm text-subtext0 mb-8">
-                <div className="flex items-center gap-2">
-                  <BookOpen className="w-4 h-4" />
-                  {course.duration}
-                </div>
-              </div>
-              <button className="w-full py-4 rounded-2xl bg-surface1 text-text font-bold hover:bg-mauve hover:text-base transition-all flex items-center justify-center gap-2">
-                Enroll Now
+              <p className="text-subtext0 text-sm mb-8">{course.description}</p>
+              <Link
+                to={`/courses/${course.id}`}
+                className="w-full py-4 rounded-2xl bg-surface1 text-text font-bold hover:bg-mauve hover:text-base transition-all flex items-center justify-center gap-2"
+              >
+                View More
                 <ChevronRight className="w-4 h-4" />
-              </button>
+              </Link>
             </div>
           </motion.div>
         ))}
@@ -424,7 +411,7 @@ const Contact = () => (
           <div>
             <h2 className="text-4xl md:text-6xl font-display font-bold text-text mb-8">Get in <span className="text-mauve">Touch</span></h2>
             <p className="text-lg text-subtext1 mb-12">Have questions about our programs or want to schedule a demo? Our team is here to help you.</p>
-            
+
             <div className="space-y-8">
               {[
                 { icon: Mail, label: 'Email Us', value: 'hello@huggingmath.com', color: 'text-mauve' },
@@ -486,34 +473,88 @@ const Contact = () => (
   </section>
 );
 
-export default function App() {
-  const [activeSection, setActiveSection] = useState<Section>('home');
+const CourseDetail = () => {
+  const { courseId } = useParams<{ courseId: string }>();
+  const navigate = useNavigate();
+  const course = COURSE_DETAILS[courseId!];
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [activeSection]);
+  if (!course) {
+    return (
+      <div className="pt-40 pb-24 text-center">
+        <h2 className="text-4xl font-display font-bold text-text mb-4">Course Not Found</h2>
+        <button onClick={() => navigate('/courses')} className="text-mauve font-bold hover:underline">
+          Back to Courses
+        </button>
+      </div>
+    );
+  }
 
   return (
+    <section className="pt-40 pb-24">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <button
+          onClick={() => navigate('/courses')}
+          className="flex items-center gap-2 text-subtext1 hover:text-mauve transition-colors mb-8"
+        >
+          <ChevronRight className="w-4 h-4 rotate-180" />
+          Back to Courses
+        </button>
+
+        <div className="bg-surface0 rounded-[40px] border border-surface1 p-8 md:p-12 shadow-2xl">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+            <div>
+              <span className="px-3 py-1 rounded-full bg-surface1 text-subtext1 text-xs font-bold uppercase tracking-widest">
+                {course.level}
+              </span>
+              <h1 className="text-4xl md:text-5xl font-display font-bold text-text mt-4 mb-2">{course.title}</h1>
+              <p className="text-lg text-subtext1">{course.description}</p>
+            </div>
+            <div className="text-right">
+              <div className="text-4xl font-display font-bold text-mauve">{course.price}</div>
+            </div>
+          </div>
+
+          <div className="prose prose-invert max-w-none mb-12">
+            <h3 className="text-2xl font-bold text-text mb-4">About This Course</h3>
+            <p className="text-subtext1 leading-relaxed">{course.fullContent}</p>
+          </div>
+
+          <div>
+            <h3 className="text-2xl font-bold text-text mb-6">Curriculum</h3>
+            <div className="space-y-3">
+              {course.curriculum.map((item, i) => (
+                <div key={i} className="flex items-center gap-4 p-4 bg-mantle rounded-2xl border border-surface1">
+                  <CheckCircle2 className="w-5 h-5 text-mauve flex-shrink-0" />
+                  <span className="text-text font-medium">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <button className="w-full mt-12 bg-mauve text-base py-5 rounded-2xl font-bold hover:bg-pink transition-all shadow-xl shadow-mauve/20 active:scale-[0.98]">
+            Enroll Now
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default function App() {
+  return (
     <div className="min-h-screen bg-base text-text selection:bg-mauve/30 selection:text-mauve">
-      <Navbar activeSection={activeSection} setActiveSection={setActiveSection} />
-      
+      <Navbar />
+
       <main>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeSection}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
-          >
-            {activeSection === 'home' && <Home setActiveSection={setActiveSection} />}
-            {activeSection === 'about' && <About />}
-            {activeSection === 'courses' && <Courses />}
-            {activeSection === 'blog' && <Blog />}
-            {activeSection === 'faq' && <FAQ />}
-            {activeSection === 'contact' && <Contact />}
-          </motion.div>
-        </AnimatePresence>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/courses/:courseId" element={<CourseDetail />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
       </main>
 
       <footer className="bg-mantle border-t border-surface0 py-20 mt-20">
@@ -528,12 +569,12 @@ export default function App() {
             Empowering the next generation of mathematicians through intuitive learning and elite competition prep.
           </p>
           <div className="flex flex-wrap justify-center gap-8 text-sm font-bold text-subtext1 uppercase tracking-widest mb-12">
-            <button onClick={() => setActiveSection('home')} className="hover:text-mauve transition-colors">Home</button>
-            <button onClick={() => setActiveSection('about')} className="hover:text-mauve transition-colors">About</button>
-            <button onClick={() => setActiveSection('courses')} className="hover:text-mauve transition-colors">Courses</button>
-            <button onClick={() => setActiveSection('blog')} className="hover:text-mauve transition-colors">Blog</button>
-            <button onClick={() => setActiveSection('faq')} className="hover:text-mauve transition-colors">FAQ</button>
-            <button onClick={() => setActiveSection('contact')} className="hover:text-mauve transition-colors">Contact</button>
+            <Link to="/" className="hover:text-mauve transition-colors">Home</Link>
+            <Link to="/about" className="hover:text-mauve transition-colors">About</Link>
+            <Link to="/courses" className="hover:text-mauve transition-colors">Courses</Link>
+            <Link to="/blog" className="hover:text-mauve transition-colors">Blog</Link>
+            <Link to="/faq" className="hover:text-mauve transition-colors">FAQ</Link>
+            <Link to="/contact" className="hover:text-mauve transition-colors">Contact</Link>
           </div>
           <div className="pt-12 border-t border-surface0 text-subtext0 text-xs flex flex-col md:flex-row justify-between items-center gap-6">
             <div>© 2026 HuggingMath. All rights reserved.</div>

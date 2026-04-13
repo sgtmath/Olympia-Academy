@@ -1,63 +1,135 @@
 
 import React from 'react';
 import type { Course, Tutor, Testimonial, BlogPost, FAQItem } from './types';
-import { SigmaIcon, InfinityIcon, CompassIcon } from './components/icons/MathIcons';
+import { Compass, Sigma, Infinity as InfinityIcon } from 'lucide-react';
 
 export const NAV_LINKS = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Courses', href: '#courses' },
-  { name: 'Tutors', href: '#tutors' },
-  { name: 'Challenge', href: '#problem-of-the-day' },
-  { name: 'Blog', href: '#blog' },
-  { name: 'FAQ', href: '#faq' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+  { name: 'Courses', href: '/courses' },
+  { name: 'Tutors', href: '/tutors' },
+  { name: 'Challenge', href: '/challenge' },
+  { name: 'Blog', href: '/blog' },
+  { name: 'FAQ', href: '/faq' },
+  { name: 'Contact', href: '/contact' },
 ];
 
 export const COURSES_DATA: Course[] = [
   {
-    icon: <CompassIcon />,
-    title: 'Junior Olympiad Foundation',
-    description: 'Building a strong foundation in problem-solving techniques, number theory, and introductory geometry for middle school students.',
-    level: 'Grades 6-8',
-    href: '/course/junior-olympiad',
+    id: 'olympiad-beginner',
+    icon: <Compass />,
+    title: 'Olympiad Beginner',
+    description: 'Introduction to competitive mathematics for 7th grade students, focusing on foundational problem solving.',
+    level: '7th Grade',
+    href: '/courses/olympiad-beginner',
   },
   {
-    icon: <SigmaIcon />,
-    title: 'Senior Olympiad Advanced',
-    description: 'Deep dive into advanced topics including combinatorics, advanced algebra, and functional equations for high school competitors.',
-    level: 'Grades 9-12',
-    href: '/course/senior-olympiad',
+    id: 'olympiad-intermediate',
+    icon: <Sigma />,
+    title: 'Olympiad Intermediate',
+    description: 'Intermediate level training for 8th grade students, introducing more complex algebraic and geometric concepts.',
+    level: '8th Grade',
+    href: '/courses/olympiad-intermediate',
   },
   {
+    id: 'cyber-olympiad',
     icon: <InfinityIcon />,
-    title: 'IMO Training Camp',
-    description: 'An intensive, invitation-only bootcamp for national-level qualifiers preparing for the International Mathematical Olympiad.',
-    level: 'Invitation Only',
-    href: '/course/imo-training-camp',
+    title: 'Cyber Olympiad',
+    description: 'A specialized track combining mathematical logic with computational thinking and cybersecurity challenges.',
+    level: 'Intermediate/Advanced',
+    href: '/courses/cyber-olympiad',
   },
   {
-    icon: <SigmaIcon />,
-    title: 'JEE (advanced) + isi cmi',
-    description: 'A specialized program targeting the rigorous requirements of JEE Advanced along with ISI and CMI entrance exams.',
+    id: 'isi-cmi-step',
+    icon: <Compass />,
+    title: 'ISI + CMI + STEP',
+    description: 'Rigorous preparation for the entrance exams of ISI, CMI, and STEP, focusing on higher-level mathematics.',
     level: 'Grades 11-12',
-    href: '/course/jee-isi-cmi',
+    href: '/courses/isi-cmi-step',
   },
   {
-    icon: <CompassIcon />,
-    title: 'Program 2',
-    description: 'Description for program 2. Focused on advanced mathematical concepts and applications.',
-    level: 'Advanced',
-    href: '/course/program-2',
-  },
-  {
-    icon: <InfinityIcon />,
-    title: 'Program 3',
-    description: 'Description for program 3. A comprehensive course for mathematical excellence.',
-    level: 'All Levels',
-    href: '/course/program-3',
+    id: 'jee-advanced',
+    icon: <Sigma />,
+    title: 'JEE Advanced',
+    description: 'Comprehensive training for the JEE Advanced exam, emphasizing deep conceptual clarity and speed.',
+    level: 'Grades 11-12',
+    href: '/courses/jee-advanced',
   },
 ];
+
+export const COURSE_DETAILS: Record<string, CourseDetail> = {
+  'olympiad-beginner': {
+    title: 'Olympiad Beginner',
+    level: '7th Grade',
+    price: '$299',
+    description: 'The perfect starting point for young mathematicians.',
+    fullContent: 'Our Olympiad Beginner course is designed to ignite the passion for mathematics. We move beyond textbook exercises to teach the art of problem solving. Students will learn how to approach unfamiliar problems, think logically, and build the confidence needed for competitive exams.',
+    curriculum: [
+      'Introduction to Problem Solving',
+      'Basic Number Theory',
+      'Elementary Geometry',
+      'Logical Reasoning',
+      'Introduction to Combinatorics'
+    ]
+  },
+  'olympiad-intermediate': {
+    title: 'Olympiad Intermediate',
+    level: '8th Grade',
+    price: '$499',
+    description: 'Bridging the gap between basics and advanced competition math.',
+    fullContent: 'Building on the foundations, the Intermediate course introduces rigorous proofs and more sophisticated techniques. We focus on developing the intuition required for national-level competitions.',
+    curriculum: [
+      'Advanced Algebra',
+      'Circle Geometry & Theorems',
+      'Prime Factorization & Divisibility',
+      'Pigeonhole Principle',
+      'Complex Problem Sets'
+    ]
+  },
+  'cyber-olympiad': {
+    title: 'Cyber Olympiad',
+    level: 'Intermediate/Advanced',
+    price: '$599',
+    description: 'Where mathematics meets the digital world.',
+    fullContent: 'The Cyber Olympiad track is unique. It blends discrete mathematics, cryptography, and algorithmic thinking to prepare students for the intersection of math and computer science.',
+    curriculum: [
+      'Binary & Hexadecimal Systems',
+      'Modulo Arithmetic in Cryptography',
+      'Graph Theory Basics',
+      'Algorithm Complexity',
+      'Cybersecurity Logic Puzzles'
+    ]
+  },
+  'isi-cmi-step': {
+    title: 'ISI + CMI + STEP',
+    level: 'Grades 11-12',
+    price: '$899',
+    description: 'Elite preparation for India\'s most prestigious math institutes.',
+    fullContent: 'A high-intensity program tailored for students aiming for ISI and CMI. We cover the entire syllabus with an emphasis on the subjectivity and rigor required for these specific exams.',
+    curriculum: [
+      'Calculus & Real Analysis',
+      'Linear Algebra',
+      'Advanced Number Theory',
+      'Coordinate Geometry',
+      'Past Paper Intensive'
+    ]
+  },
+  'jee-advanced': {
+    title: 'JEE Advanced',
+    level: 'Grades 11-12',
+    price: '$799',
+    description: 'Mastering the most challenging engineering entrance exam.',
+    fullContent: 'Focusing on the "Advanced" part of JEE, we dive deep into multiple-concept problems. Our approach is to build conceptual bridges between different topics to solve complex questions efficiently.',
+    curriculum: [
+      'Complex Numbers & Quadratic Equations',
+      'Integral Calculus Mastery',
+      '3D Geometry & Vectors',
+      'Probability & Statistics',
+      'Time-Management Strategies'
+    ]
+  }
+};
+
 
 
 

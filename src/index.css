@@ -1,9 +1,10 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Space Grotesk", sans-serif;
-  
+
   /* Catppuccin Macchiato Palette */
   --color-base: #24273a;
   --color-mantle: #1e2030;
@@ -17,7 +18,7 @@
   --color-surface2: #5b6078;
   --color-surface1: #494d64;
   --color-surface0: #363a4f;
-  
+
   --color-rosewater: #f4dbd6;
   --color-flamingo: #f0c6c6;
   --color-pink: #f5bde6;
@@ -39,5 +40,3 @@
     @apply font-sans bg-base text-text;
   }
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
