@@ -47,9 +47,9 @@ describe('Home', () => {
   it('renders hero heading and stats', () => {
     renderWithRouter(<Home />);
     const heading = screen.getByRole('heading', { level: 1 });
-    expect(heading.textContent).toMatch(/Love Math/);
-    expect(screen.getByText('Explore Courses')).toBeInTheDocument();
-    expect(screen.getByText('Our Story')).toBeInTheDocument();
+    expect(heading.textContent).toMatch(/Decode/);
+    expect(screen.getByText('Start Learning')).toBeInTheDocument();
+    expect(screen.getByText('View Methodology')).toBeInTheDocument();
     expect(screen.getByText('10k+')).toBeInTheDocument();
     expect(screen.getByText('450+')).toBeInTheDocument();
     expect(screen.getByText('25+')).toBeInTheDocument();

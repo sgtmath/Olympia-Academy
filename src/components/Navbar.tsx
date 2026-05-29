@@ -28,11 +28,11 @@ export default function Navbar() {
         <div className="flex justify-between h-20 items-center">
           <Link to="/" className="flex items-center gap-3 cursor-pointer group">
             <div
-              className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-mauve/20 overflow-hidden flex-shrink-0"
+              className="w-10 h-10 md:w-12 md:h-12 rounded-xl overflow-hidden flex-shrink-0"
               style={{
                 backgroundImage: 'url(/logo.png)',
-                backgroundSize: '200% 100%',
-                backgroundPosition: 'right center',
+                backgroundSize: 'contain',
+                backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
               }}
             />

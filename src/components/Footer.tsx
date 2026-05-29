@@ -8,11 +8,11 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <div className="flex items-center justify-center gap-3 mb-8">
           <div
-            className="w-9 h-9 rounded-xl bg-mauve/20 overflow-hidden flex-shrink-0 border border-white/10"
+            className="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0"
             style={{
               backgroundImage: 'url(/logo.png)',
-              backgroundSize: '200% 100%',
-              backgroundPosition: 'right center',
+              backgroundSize: 'contain',
+              backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
             }}
           />

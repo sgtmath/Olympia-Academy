@@ -52,7 +52,8 @@ export default function Home() {
             transition={{ delay: 0.2 }}
             className="text-xl md:text-2xl text-subtext1 mb-14 leading-relaxed max-w-3xl"
           >
-            Bijank is where curiosity meets rigorous training. We help elite minds unlock their mathematical potential through state-of-the-art learning and competition prep.
+            <span className="font-display font-bold text-text">Bijank</span>{' '}
+            <span lang="sa" className="sanskrit-text text-mauve font-display font-bold">बीजाङ्क</span> is where curiosity meets rigorous training. We help elite minds unlock their mathematical potential through state-of-the-art learning and competition prep.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
