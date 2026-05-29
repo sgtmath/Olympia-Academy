@@ -1,42 +1,39 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+@import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Space Grotesk", sans-serif;
 
-  /* Catppuccin Macchiato Palette */
-  --color-base: #24273a;
-  --color-mantle: #1e2030;
-  --color-crust: #181926;
-  --color-text: #cad3f5;
-  --color-subtext1: #b8c0e0;
-  --color-subtext0: #a5adcb;
-  --color-overlay2: #939ab7;
-  --color-overlay1: #8087a2;
-  --color-overlay0: #6e738d;
-  --color-surface2: #5b6078;
-  --color-surface1: #494d64;
-  --color-surface0: #363a4f;
+  /* Elite Tech Dark Mode */
+  --color-base: #0a0a0a;
+  --color-mantle: #121212;
+  --color-crust: #1a1a1a;
+  --color-text: #f8fafc;
+  --color-subtext1: #cbd5e1;
+  --color-subtext0: #94a3b8;
+  --color-overlay2: #64748b;
+  --color-overlay1: #475569;
+  --color-overlay0: #334155;
+  --color-surface2: #27272a;
+  --color-surface1: #1f1f22;
+  --color-surface0: #18181b;
 
-  --color-rosewater: #f4dbd6;
-  --color-flamingo: #f0c6c6;
-  --color-pink: #f5bde6;
-  --color-mauve: #c6a0f6;
-  --color-red: #ed8796;
-  --color-maroon: #ee99a0;
-  --color-peach: #f5a97f;
-  --color-yellow: #eed49f;
-  --color-green: #a6da95;
-  --color-teal: #8bd5ca;
-  --color-sky: #91d7e3;
-  --color-sapphire: #7dc4e4;
-  --color-blue: #8aadf4;
-  --color-lavender: #b7bdf8;
+  /* Neon Accents */
+  --color-mauve: #8b5cf6; /* Vibrant Purple */
+  --color-pink: #ec4899;
+  --color-red: #ef4444;
+  --color-peach: #f97316;
+  --color-yellow: #eab308;
+  --color-green: #10b981;
+  --color-teal: #14b8a6;
+  --color-sky: #0ea5e9;
+  --color-blue: #3b82f6;
+  --color-indigo: #6366f1;
 }
 
 @layer base {
   body {
-    @apply font-sans bg-base text-text;
+    @apply font-sans bg-base text-text antialiased selection:bg-mauve/30 selection:text-white;
   }
 }

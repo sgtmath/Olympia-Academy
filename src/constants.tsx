@@ -1,14 +1,12 @@
 
 import React from 'react';
-import type { Course, Tutor, Testimonial, BlogPost, FAQItem } from './types';
+import type { Course, CourseDetail, Tutor, Testimonial, BlogPost, FAQItem } from './types';
 import { Compass, Sigma, Infinity as InfinityIcon } from 'lucide-react';
 
 export const NAV_LINKS = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
   { name: 'Courses', href: '/courses' },
-  { name: 'Tutors', href: '/tutors' },
-  { name: 'Challenge', href: '/challenge' },
   { name: 'Blog', href: '/blog' },
   { name: 'FAQ', href: '/faq' },
   { name: 'Contact', href: '/contact' },
@@ -135,7 +133,7 @@ export const COURSE_DETAILS: Record<string, CourseDetail> = {
 
 export const TESTIMONIALS_DATA: Testimonial[] = [
   {
-    quote: "HuggingMath transformed my approach to math. The problem-solving strategies I learned here were key to my USAMO qualification.",
+    quote: "Bijank transformed my approach to math. The problem-solving strategies I learned here were key to my USAMO qualification.",
     name: 'Alex Johnson',
     achievement: 'USAMO Qualifier, 2023',
   },
@@ -288,7 +286,7 @@ export const TUTORS_DATA: Tutor[] = [
 
 export const FAQ_DATA: FAQItem[] = [
   {
-    question: 'Who is eligible for the courses at HuggingMath?',
+    question: 'Who is eligible for the courses at Bijank?',
     answer: 'Our courses are designed for students from grades 6 through 12. The Junior Olympiad Foundation course is for grades 6-8, while the Senior Olympiad Advanced course is for grades 9-12. The IMO Training Camp is by invitation only.'
   },
   {
